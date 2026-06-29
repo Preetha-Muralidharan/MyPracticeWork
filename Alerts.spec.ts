@@ -20,7 +20,7 @@ import {test} from "@playwright/test"
 test( "Alert Handling",async({page})=>
   {
     await page.goto("https://www.leafground.com/alert.xhtml")
-page.on('dialog',(alert)=>{
+page.on('dialog',async(alert)=>{
 console.log(alert.type())
 console.log(alert.message())
 
@@ -28,16 +28,16 @@ let alertType=alert.type()
 switch(alertType)
 {
     case "alert":
-    alert.accept()
+    await alert.accept()
     break
     case "confirm":
-        alert.dismiss()
+       await alert.dismiss()
         break
     case "Prompt":
-     alert.accept("Playwright")
+    await alert.accept("Playwright")
         break
     default:
-         alert.dismiss()
+       await  alert.dismiss()
 
 }
 })
